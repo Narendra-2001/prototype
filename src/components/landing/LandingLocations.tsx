@@ -68,7 +68,7 @@ export function LandingLocations() {
               Explore guest houses near you
             </h2>
             <p className="mt-4 text-base leading-relaxed text-[#717171] sm:text-[17px]">
-              Official government accommodation in Bengaluru, Hyderabad, Delhi, and Chennai —
+              Official government accommodation across Karnataka —
               with live availability and transparent rates.
             </p>
           </div>

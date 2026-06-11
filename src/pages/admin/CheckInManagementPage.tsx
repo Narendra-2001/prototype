@@ -17,7 +17,7 @@ import { usePageTransition } from "@/hooks/useGsap"
 import type { CheckInRecord } from "@/types/admin"
 
 const FALLBACK_CHECKINS: CheckInRecord[] = [
-  { id: "1", bookingId: "GHB-2026-001", guest: "Rajesh Kumar", site: "Delhi Guest House", room: "203", expectedTime: "14:00", status: "expected" },
+  { id: "1", bookingId: "GHB-2026-001", guest: "Rajesh Kumar", site: "Belagavi Guest House", room: "203", expectedTime: "14:00", status: "expected" },
   { id: "2", bookingId: "GHB-2026-002", guest: "Priya Sharma", site: "Bengaluru Guest House", room: "101", expectedTime: "15:30", status: "late" },
 ]
 

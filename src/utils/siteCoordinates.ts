@@ -5,16 +5,16 @@ export interface SiteCoordinate {
 
 export const SITE_COORDINATES: Record<string, SiteCoordinate> = {
   bengaluru: { lat: 12.9716, lng: 77.5946 },
-  hyderabad: { lat: 17.385, lng: 78.4867 },
-  delhi: { lat: 28.6139, lng: 77.209 },
-  chennai: { lat: 13.0827, lng: 80.2707 },
+  mysuru: { lat: 12.2958, lng: 76.6394 },
+  belagavi: { lat: 15.8497, lng: 74.4977 },
+  mangaluru: { lat: 12.9141, lng: 74.856 },
 }
 
 const SITE_SEARCH_LABELS: Record<string, string> = {
   bengaluru: "Bengaluru, Karnataka",
-  hyderabad: "Hyderabad, Telangana",
-  delhi: "Delhi, India",
-  chennai: "Chennai, Tamil Nadu",
+  mysuru: "Mysuru, Karnataka",
+  belagavi: "Belagavi, Karnataka",
+  mangaluru: "Mangaluru, Karnataka",
 }
 
 export function getSiteSearchLabel(siteId: string) {
@@ -34,7 +34,7 @@ const CITY_SPREAD: Record<string, { lat: number; lng: number }[]> = {
     { lat: -0.03, lng: 0.022 },
     { lat: 0.035, lng: 0.012 },
   ],
-  hyderabad: [
+  mysuru: [
     { lat: 0, lng: 0 },
     { lat: 0.02, lng: 0.015 },
     { lat: -0.018, lng: 0.025 },
@@ -42,7 +42,7 @@ const CITY_SPREAD: Record<string, { lat: number; lng: number }[]> = {
     { lat: -0.025, lng: -0.01 },
     { lat: 0.03, lng: 0.008 },
   ],
-  delhi: [
+  belagavi: [
     { lat: 0, lng: 0 },
     { lat: 0.022, lng: 0.014 },
     { lat: -0.02, lng: 0.028 },
@@ -50,7 +50,7 @@ const CITY_SPREAD: Record<string, { lat: number; lng: number }[]> = {
     { lat: -0.028, lng: -0.015 },
     { lat: 0.025, lng: 0.02 },
   ],
-  chennai: [
+  mangaluru: [
     { lat: 0, lng: 0 },
     { lat: 0.02, lng: 0.016 },
     { lat: -0.018, lng: 0.024 },

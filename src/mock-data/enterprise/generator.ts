@@ -19,18 +19,44 @@ import type {
 } from "@/types/admin"
 import { AMENITIES, ROOM_TYPE_DEFAULTS } from "@/types/admin"
 
-const STATES = [
-  { state: "Karnataka", districts: ["Bengaluru Urban", "Mysuru", "Mangaluru", "Hubballi"] },
-  { state: "Telangana", districts: ["Hyderabad", "Warangal", "Karimnagar", "Nizamabad"] },
-  { state: "Delhi", districts: ["New Delhi", "Central Delhi", "South Delhi", "North Delhi"] },
-  { state: "Tamil Nadu", districts: ["Chennai", "Coimbatore", "Madurai", "Salem"] },
-  { state: "Maharashtra", districts: ["Mumbai", "Pune", "Nagpur", "Nashik"] },
-  { state: "Gujarat", districts: ["Ahmedabad", "Surat", "Vadodara", "Rajkot"] },
-  { state: "Rajasthan", districts: ["Jaipur", "Jodhpur", "Udaipur", "Kota"] },
-  { state: "West Bengal", districts: ["Kolkata", "Howrah", "Siliguri", "Durgapur"] },
-  { state: "Uttar Pradesh", districts: ["Lucknow", "Kanpur", "Varanasi", "Agra"] },
-  { state: "Kerala", districts: ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur"] },
-]
+const KARNATAKA_DISTRICTS = [
+  "Bagalkot",
+  "Ballari",
+  "Belagavi",
+  "Bengaluru Rural",
+  "Bengaluru Urban",
+  "Bidar",
+  "Chamarajanagar",
+  "Chikkaballapura",
+  "Chikkamagaluru",
+  "Chitradurga",
+  "Dakshina Kannada",
+  "Davanagere",
+  "Dharwad",
+  "Gadag",
+  "Hassan",
+  "Haveri",
+  "Kalaburagi",
+  "Kodagu",
+  "Kolar",
+  "Koppal",
+  "Mandya",
+  "Mysuru",
+  "Raichur",
+] as const
+
+const STATES = [{ state: "Karnataka", districts: [...KARNATAKA_DISTRICTS] }]
+
+const DISTRICT_CITIES: Record<string, string> = {
+  "Bengaluru Rural": "Devanahalli",
+  "Bengaluru Urban": "Bengaluru",
+  "Dakshina Kannada": "Mangaluru",
+  Kodagu: "Madikeri",
+}
+
+function districtCity(district: string) {
+  return DISTRICT_CITIES[district] ?? district.split(" ")[0]
+}
 
 const DEPARTMENTS = [
   "Finance Ministry",
@@ -113,18 +139,18 @@ const LEGACY_SITES: AdminSite[] = [
     rating: 4.7,
   },
   {
-    id: "hyderabad",
-    name: "Hyderabad Guest House",
-    siteCode: "GH-HYD-001",
-    address: "Banjara Hills, Hyderabad, Telangana 500034",
-    state: "Telangana",
-    district: "Hyderabad",
-    city: "Hyderabad",
-    pinCode: "500034",
-    latitude: 17.4065,
-    longitude: 78.4772,
-    contactNumber: "+91 40 2333 2002",
-    email: "hyd@guesthouse.gov.in",
+    id: "mysuru",
+    name: "Mysuru Guest House",
+    siteCode: "GH-MYS-001",
+    address: "Sayyaji Rao Road, Mysuru, Karnataka 570001",
+    state: "Karnataka",
+    district: "Mysuru",
+    city: "Mysuru",
+    pinCode: "570001",
+    latitude: 12.2958,
+    longitude: 76.6394,
+    contactNumber: "+91 821 242 2002",
+    email: "mys@guesthouse.gov.in",
     status: "active",
     occupancy: 78,
     revenue: 6200000,
@@ -134,18 +160,18 @@ const LEGACY_SITES: AdminSite[] = [
     rating: 4.5,
   },
   {
-    id: "delhi",
-    name: "Delhi Guest House",
-    siteCode: "GH-DEL-001",
-    address: "Connaught Place, New Delhi 110001",
-    state: "Delhi",
-    district: "New Delhi",
-    city: "New Delhi",
-    pinCode: "110001",
-    latitude: 28.6139,
-    longitude: 77.209,
-    contactNumber: "+91 11 2345 3003",
-    email: "del@guesthouse.gov.in",
+    id: "belagavi",
+    name: "Belagavi Guest House",
+    siteCode: "GH-BLG-001",
+    address: "Camp Area, Belagavi, Karnataka 590001",
+    state: "Karnataka",
+    district: "Belagavi",
+    city: "Belagavi",
+    pinCode: "590001",
+    latitude: 15.8497,
+    longitude: 74.4977,
+    contactNumber: "+91 831 242 3003",
+    email: "blg@guesthouse.gov.in",
     status: "active",
     occupancy: 72,
     revenue: 9100000,
@@ -155,18 +181,18 @@ const LEGACY_SITES: AdminSite[] = [
     rating: 4.6,
   },
   {
-    id: "chennai",
-    name: "Chennai Guest House",
-    siteCode: "GH-CHE-001",
-    address: "Anna Salai, Chennai, Tamil Nadu 600002",
-    state: "Tamil Nadu",
-    district: "Chennai",
-    city: "Chennai",
-    pinCode: "600002",
-    latitude: 13.0827,
-    longitude: 80.2707,
-    contactNumber: "+91 44 2811 4004",
-    email: "che@guesthouse.gov.in",
+    id: "mangaluru",
+    name: "Mangaluru Guest House",
+    siteCode: "GH-MNG-001",
+    address: "Hampankatta, Mangaluru, Karnataka 575001",
+    state: "Karnataka",
+    district: "Dakshina Kannada",
+    city: "Mangaluru",
+    pinCode: "575001",
+    latitude: 12.9141,
+    longitude: 74.856,
+    contactNumber: "+91 824 242 4004",
+    email: "mng@guesthouse.gov.in",
     status: "active",
     occupancy: 76,
     revenue: 5400000,
@@ -233,7 +259,7 @@ export function generateEnterpriseData(): EnterpriseData {
   for (let i = 5; i <= 100; i++) {
     const loc = pick(rng, STATES)
     const district = pick(rng, loc.districts)
-    const city = district.split(" ")[0]
+    const city = districtCity(district)
     sites.push({
       id: `site-${pad(i)}`,
       name: `${city} Government Guest House`,
@@ -263,9 +289,9 @@ export function generateEnterpriseData(): EnterpriseData {
     for (let b = 1; b <= bCount; b++) {
       buildingIdx++
       const bid = site.id === "bengaluru" ? ["blr-a", "blr-b", "blr-c"][b - 1]
-        : site.id === "hyderabad" ? ["hyd-a", "hyd-b"][b - 1]
-        : site.id === "delhi" ? ["del-a", "del-b", "del-c"][b - 1]
-        : site.id === "chennai" ? ["che-a", "che-b"][b - 1]
+        : site.id === "mysuru" ? ["mys-a", "mys-b"][b - 1]
+        : site.id === "belagavi" ? ["blg-a", "blg-b", "blg-c"][b - 1]
+        : site.id === "mangaluru" ? ["mng-a", "mng-b"][b - 1]
         : `bld-${pad(buildingIdx, 4)}`
       const floorCount = site.id.startsWith("site-") ? 4 : Math.floor(2 + rng() * 3)
       const roomCount = site.id.startsWith("site-") ? Math.floor(site.roomsCount / bCount) : 20
@@ -480,7 +506,7 @@ export function generateEnterpriseData(): EnterpriseData {
   }
 
   const activities: ActivityItem[] = [
-    { id: "1", type: "booking", title: "Room booked", description: "Executive suite reserved at Delhi Guest House", timestamp: new Date(Date.now() - 3600000).toISOString(), actor: "Rajesh Kumar" },
+    { id: "1", type: "booking", title: "Room booked", description: "Executive suite reserved at Belagavi Guest House", timestamp: new Date(Date.now() - 3600000).toISOString(), actor: "Rajesh Kumar" },
     { id: "2", type: "user", title: "User registered", description: "New employee verification submitted", timestamp: new Date(Date.now() - 7200000).toISOString(), actor: "System" },
     { id: "3", type: "payment", title: "Payment success", description: "₹4,248 received via UPI", timestamp: new Date(Date.now() - 10800000).toISOString() },
     { id: "4", type: "checkin", title: "Check-in completed", description: "Room 203 — Bengaluru Guest House", timestamp: new Date(Date.now() - 14400000).toISOString() },

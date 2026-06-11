@@ -136,11 +136,11 @@ const OVERRIDE_ACTIONS: {
 ]
 
 const SITES = [
-  "Delhi Guest House",
-  "Mumbai Guest House",
-  "Chennai Guest House",
-  "Kolkata Guest House",
   "Bengaluru Guest House",
+  "Mysuru Guest House",
+  "Belagavi Guest House",
+  "Mangaluru Guest House",
+  "Ballari Guest House",
 ]
 
 const RECENT_OVERRIDES = [
@@ -149,7 +149,7 @@ const RECENT_OVERRIDES = [
     guest: "Dr. Rajesh Kumar",
     action: "Priority allocation",
     reason: "VIP Guest",
-    site: "Delhi Guest House",
+    site: "Belagavi Guest House",
     status: "completed" as const,
     time: "2 hours ago",
   },
@@ -158,7 +158,7 @@ const RECENT_OVERRIDES = [
     guest: "Ministry Delegation",
     action: "Force allocation",
     reason: "Delegation",
-    site: "Mumbai Guest House",
+    site: "Mysuru Guest House",
     status: "completed" as const,
     time: "Yesterday",
   },
@@ -167,7 +167,7 @@ const RECENT_OVERRIDES = [
     guest: "Inspection Team",
     action: "Bypass restrictions",
     reason: "Inspection",
-    site: "Chennai Guest House",
+    site: "Mangaluru Guest House",
     status: "pending" as const,
     time: "Yesterday",
   },

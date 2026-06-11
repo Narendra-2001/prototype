@@ -17,8 +17,8 @@ import { usePageTransition } from "@/hooks/useGsap"
 import type { CheckOutRecord } from "@/types/admin"
 
 const FALLBACK_CHECKOUTS: CheckOutRecord[] = [
-  { id: "1", bookingId: "GHB-2026-010", guest: "Amit Patel", site: "Hyderabad Guest House", room: "105", expectedTime: "11:00", status: "expected" },
-  { id: "2", bookingId: "GHB-2026-011", guest: "Sneha Reddy", site: "Chennai Guest House", room: "302", expectedTime: "10:00", status: "overstay" },
+  { id: "1", bookingId: "GHB-2026-010", guest: "Amit Patel", site: "Mysuru Guest House", room: "105", expectedTime: "11:00", status: "expected" },
+  { id: "2", bookingId: "GHB-2026-011", guest: "Sneha Reddy", site: "Mangaluru Guest House", room: "302", expectedTime: "10:00", status: "overstay" },
 ]
 
 export function CheckOutManagementPage() {

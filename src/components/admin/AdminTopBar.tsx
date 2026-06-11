@@ -72,7 +72,7 @@ const ADMIN_NOTIFICATIONS = [
 ]
 
 const EMPLOYEE_NOTIFICATIONS = [
-  { id: "1", title: "Booking confirmed — Delhi GH", time: "1h ago", unread: true },
+  { id: "1", title: "Booking confirmed — Mysuru GH", time: "1h ago", unread: true },
   { id: "2", title: "Check-in opens tomorrow at 2 PM", time: "3h ago", unread: true },
   { id: "3", title: "Digital key ready for Room 204", time: "Yesterday", unread: false },
   { id: "4", title: "Payment receipt available", time: "2 days ago", unread: false },

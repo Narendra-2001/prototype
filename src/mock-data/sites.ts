@@ -15,10 +15,10 @@ export const sites: Site[] = [
     buildingsCount: 3,
   },
   {
-    id: "hyderabad",
-    name: "Hyderabad Guest House",
-    city: "Hyderabad",
-    address: "Banjara Hills, Hyderabad, Telangana 500034",
+    id: "mysuru",
+    name: "Mysuru Guest House",
+    city: "Mysuru",
+    address: "Sayyaji Rao Road, Mysuru, Karnataka 570001",
     image:
       "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
     rating: 4.5,
@@ -28,10 +28,10 @@ export const sites: Site[] = [
     buildingsCount: 2,
   },
   {
-    id: "delhi",
-    name: "Delhi Guest House",
-    city: "New Delhi",
-    address: "Connaught Place, New Delhi 110001",
+    id: "belagavi",
+    name: "Belagavi Guest House",
+    city: "Belagavi",
+    address: "Camp Area, Belagavi, Karnataka 590001",
     image:
       "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80",
     rating: 4.6,
@@ -41,10 +41,10 @@ export const sites: Site[] = [
     buildingsCount: 3,
   },
   {
-    id: "chennai",
-    name: "Chennai Guest House",
-    city: "Chennai",
-    address: "Anna Salai, Chennai, Tamil Nadu 600002",
+    id: "mangaluru",
+    name: "Mangaluru Guest House",
+    city: "Mangaluru",
+    address: "Hampankatta, Mangaluru, Karnataka 575001",
     image:
       "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
     rating: 4.4,

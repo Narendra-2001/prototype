@@ -27,21 +27,21 @@ const SITE_GALLERY_IMAGES: Record<string, string[]> = {
     LISTING_IMAGES[7],
     LISTING_IMAGES[9],
   ],
-  hyderabad: [
+  mysuru: [
     LISTING_IMAGES[1],
     LISTING_IMAGES[2],
     LISTING_IMAGES[6],
     LISTING_IMAGES[8],
     LISTING_IMAGES[10],
   ],
-  delhi: [
+  belagavi: [
     LISTING_IMAGES[0],
     LISTING_IMAGES[3],
     LISTING_IMAGES[4],
     LISTING_IMAGES[5],
     LISTING_IMAGES[7],
   ],
-  chennai: [
+  mangaluru: [
     LISTING_IMAGES[2],
     LISTING_IMAGES[4],
     LISTING_IMAGES[6],
@@ -52,9 +52,9 @@ const SITE_GALLERY_IMAGES: Record<string, string[]> = {
 
 const SITE_LISTING_IMAGES: Record<string, string> = {
   bengaluru: LISTING_IMAGES[0],
-  hyderabad: LISTING_IMAGES[1],
-  delhi: LISTING_IMAGES[3],
-  chennai: LISTING_IMAGES[2],
+  mysuru: LISTING_IMAGES[1],
+  belagavi: LISTING_IMAGES[3],
+  mangaluru: LISTING_IMAGES[2],
 }
 
 export const GALLERY_FALLBACK_IMAGES = [...LISTING_IMAGES, heroBackground]
@@ -131,15 +131,17 @@ export function getReportImage(title: string) {
   return pickFromPool(title, REPORT_IMAGES)
 }
 
+const AVATAR_PARAMS = "?w=128&h=128&fit=crop&crop=face&q=80"
+
 const USER_AVATAR_IMAGES = [
-  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=128&h=128&fit=crop&crop=face&q=80",
-  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&h=128&fit=crop&crop=face&q=80",
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=128&h=128&fit=crop&crop=face&q=80",
-  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=128&h=128&fit=crop&crop=face&q=80",
-  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=128&h=128&fit=crop&crop=face&q=80",
-  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=128&h=128&fit=crop&crop=face&q=80",
-  "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=128&h=128&fit=crop&crop=face&q=80",
-  "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=128&h=128&fit=crop&crop=face&q=80",
+  `https://images.unsplash.com/photo-1712425718137-491250cfde88${AVATAR_PARAMS}`,
+  `https://images.unsplash.com/photo-1697517529954-b6845f3245a0${AVATAR_PARAMS}`,
+  `https://images.unsplash.com/photo-1670110531916-41045e83cb0a${AVATAR_PARAMS}`,
+  `https://images.unsplash.com/photo-1705513054794-d18a8eb0af6c${AVATAR_PARAMS}`,
+  `https://images.unsplash.com/photo-1712425718085-cdd2b2298669${AVATAR_PARAMS}`,
+  `https://images.unsplash.com/photo-1647689662423-7948c8523256${AVATAR_PARAMS}`,
+  `https://images.unsplash.com/photo-1618926749434-0578ceecdfab${AVATAR_PARAMS}`,
+  `https://images.unsplash.com/photo-1729157661483-ed21901ed892${AVATAR_PARAMS}`,
 ]
 
 export function getUserAvatar(name: string, id?: string) {
@@ -147,10 +149,10 @@ export function getUserAvatar(name: string, id?: string) {
 }
 
 const DEMO_EMPLOYEE_AVATAR =
-  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=128&h=128&fit=crop&crop=face&q=80"
+  `https://images.unsplash.com/photo-1712425718137-491250cfde88${AVATAR_PARAMS}`
 
 const DEMO_ADMIN_AVATAR =
-  "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=128&h=128&fit=crop&crop=face&q=80"
+  `https://images.unsplash.com/photo-1712425718085-cdd2b2298669${AVATAR_PARAMS}`
 
 export function getEmployeeProfileImage(name: string, id?: string) {
   const key = name.trim().toLowerCase()

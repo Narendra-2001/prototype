@@ -110,7 +110,7 @@ export function LandingAppPreview() {
 
                 <div className="preview-phone rounded-xl border border-dashed border-border/60 bg-[#fafafa] px-4 py-3 text-center">
                   <p className="text-xs text-[#717171]">
-                    Scroll to explore Hyderabad, Delhi, Chennai & more
+                    Scroll to explore Mysuru, Belagavi, Mangaluru & more
                   </p>
                 </div>
               </div>

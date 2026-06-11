@@ -48,7 +48,7 @@ export function EmployeeExploreView() {
   )
 
   const southListings = useMemo(
-    () => sitesWithPrice.filter((s) => ["Bengaluru", "Hyderabad", "Chennai"].includes(s.site.city)),
+    () => sitesWithPrice.filter((s) => ["Bengaluru", "Mysuru", "Mangaluru"].includes(s.site.city)),
     [sitesWithPrice]
   )
 
@@ -90,7 +90,7 @@ export function EmployeeExploreView() {
             />
             {southListings.length > 0 && (
               <PopularHomesCarousel
-                title="Popular in South India"
+                title="Popular across Karnataka"
                 listings={southListings}
               />
             )}

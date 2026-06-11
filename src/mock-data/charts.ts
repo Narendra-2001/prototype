@@ -24,14 +24,14 @@ export const roomUtilization = [
 
 export const siteOccupancy = [
   { site: "Bengaluru", occupancy: 75 },
-  { site: "Hyderabad", occupancy: 78 },
-  { site: "Delhi", occupancy: 72 },
-  { site: "Chennai", occupancy: 76 },
+  { site: "Mysuru", occupancy: 78 },
+  { site: "Belagavi", occupancy: 72 },
+  { site: "Mangaluru", occupancy: 76 },
 ]
 
 export const revenueBySite = [
   { site: "Bengaluru", revenue: 845 },
-  { site: "Hyderabad", revenue: 620 },
-  { site: "Delhi", revenue: 910 },
-  { site: "Chennai", revenue: 540 },
+  { site: "Mysuru", revenue: 620 },
+  { site: "Belagavi", revenue: 910 },
+  { site: "Mangaluru", revenue: 540 },
 ]

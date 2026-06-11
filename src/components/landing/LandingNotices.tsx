@@ -31,9 +31,9 @@ const notices = [
     id: "4",
     tag: "Update",
     date: "12 Apr 2026",
-    title: "New Delhi facility — extended booking window",
+    title: "Belagavi facility — extended booking window",
     summary:
-      "Book Delhi Guest House rooms up to 60 days in advance for official duty travel, subject to availability.",
+      "Book Belagavi Guest House rooms up to 60 days in advance for official duty travel, subject to availability.",
   },
 ]
 
