@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { Link } from "react-router-dom"
 import { Building2, Eye, Plus } from "lucide-react"
-import { createAdminBuilding, fetchAdminBuildings } from "@/services/adminApi"
+import { createAdminBuilding, fetchAdminBuildings, fetchAdminSites } from "@/services/adminApi"
 import { AdminCardGrid } from "@/components/admin/AdminCardGrid"
 import { AdminListToolbar } from "@/components/admin/AdminListToolbar"
 import { AdminListView } from "@/components/admin/AdminListView"
@@ -17,12 +17,20 @@ import {
   AdminSheetShell,
   AdminSheetSubmitButton,
   adminFieldInputClass,
+  adminFieldSelectClass,
 } from "@/components/admin/AdminSheetPanel"
 import { PageHeader } from "@/components/shared/PageHeader"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Sheet } from "@/components/ui/sheet"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { toast } from "sonner"
 import { usePageTransition } from "@/hooks/useGsap"
 import type { AdminBuilding } from "@/types/admin"
@@ -30,28 +38,20 @@ import type { AdminBuilding } from "@/types/admin"
 type BuildingFormData = {
   name: string
   buildingCode: string
-  site: string
+  siteId: string
   description: string
 }
 
 const EMPTY_BUILDING_FORM: BuildingFormData = {
   name: "",
   buildingCode: "",
-  site: "",
+  siteId: "",
   description: "",
 }
 
-const DEMO_BUILDING_FORM: BuildingFormData = {
-  name: "Demo Building A",
-  buildingCode: "GH-DEMO-001-B1",
-  site: "Demo Guest House",
-  description: "Administrative block at demo site",
-}
-
-const BUILDING_FORM_FIELDS: { label: string; key: keyof BuildingFormData }[] = [
+const BUILDING_FORM_FIELDS: { label: string; key: keyof Omit<BuildingFormData, "siteId"> }[] = [
   { label: "Building Name", key: "name" },
   { label: "Building Code", key: "buildingCode" },
-  { label: "Site", key: "site" },
   { label: "Description", key: "description" },
 ]
 
@@ -75,7 +75,30 @@ export function BuildingManagementPage() {
     queryFn: () => fetchAdminBuildings({ page, pageSize: 20, search }),
   })
 
+  const { data: sitesResult } = useQuery({
+    queryKey: ["admin-sites", "building-form"],
+    queryFn: () => fetchAdminSites({ pageSize: 100 }),
+    enabled: createOpen,
+  })
+
+  const sites = sitesResult?.data ?? []
+
+  const fillDemoBuildingForm = () => {
+    const site = sites.find((s) => s.name === "Demo Guest House") ?? sites[0]
+    setBuildingForm({
+      name: "Demo Building A",
+      buildingCode: "GH-DEMO-001-B1",
+      siteId: site?.id ?? "",
+      description: "Administrative block at demo site",
+    })
+  }
+
   const handleCreateBuilding = async () => {
+    if (!buildingForm.siteId) {
+      toast.error("Please select a site")
+      return
+    }
+
     setIsCreating(true)
     try {
       await createAdminBuilding(buildingForm)
@@ -119,14 +142,14 @@ export function BuildingManagementPage() {
                 variant="outline"
                 size="sm"
                 className="rounded-full"
-                onClick={() => setBuildingForm(DEMO_BUILDING_FORM)}
+                onClick={fillDemoBuildingForm}
               >
                 Demo
               </Button>
             }
             footer={
               <AdminSheetSubmitButton
-                disabled={isCreating}
+                disabled={isCreating || !buildingForm.siteId}
                 loading={isCreating}
                 onClick={handleCreateBuilding}
               >
@@ -135,6 +158,26 @@ export function BuildingManagementPage() {
             }
           >
             <AdminFormSection title="Building details">
+              <div className="space-y-2">
+                <Label className="text-sm font-medium">Site</Label>
+                <Select
+                  value={buildingForm.siteId || undefined}
+                  onValueChange={(value) =>
+                    setBuildingForm((prev) => ({ ...prev, siteId: value }))
+                  }
+                >
+                  <SelectTrigger className={adminFieldSelectClass}>
+                    <SelectValue placeholder="Select site" />
+                  </SelectTrigger>
+                  <SelectContent className="rounded-xl">
+                    {sites.map((site) => (
+                      <SelectItem key={site.id} value={site.id}>
+                        {site.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               {BUILDING_FORM_FIELDS.map(({ label, key }) => (
                 <div key={key} className="space-y-2">
                   <Label className="text-sm font-medium">{label}</Label>

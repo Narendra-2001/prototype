@@ -188,7 +188,7 @@ export function AnalyticsPage() {
                 </Pie>
                 <Tooltip
                   contentStyle={CHART_TOOLTIP_STYLE.contentStyle}
-                  formatter={(value: number) => [formatCurrency(value), "Revenue"]}
+                  formatter={(value) => [formatCurrency(Number(value ?? 0)), "Revenue"]}
                 />
                 <Legend
                   layout="horizontal"

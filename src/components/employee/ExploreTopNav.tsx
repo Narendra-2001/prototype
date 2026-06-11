@@ -1,3 +1,4 @@
+import type { ComponentType } from "react"
 import { Link, useLocation } from "react-router-dom"
 import homesNavIcon from "@/assets/nav-home-icon.png"
 import locationsNavIcon from "@/assets/nav-locations-icon.png"
@@ -6,7 +7,7 @@ import { cn } from "@/lib/utils"
 interface NavTab {
   label: string
   href: string
-  icon: ({ className }: { className?: string }) => JSX.Element
+  icon: ComponentType<{ className?: string }>
 }
 
 function HomesNavIcon({ className }: { className?: string }) {

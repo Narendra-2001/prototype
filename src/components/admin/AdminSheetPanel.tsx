@@ -1,4 +1,4 @@
-import type { ComponentType, ReactNode } from "react"
+import type { ComponentType, ReactNode, SVGProps } from "react"
 import { Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet"
@@ -43,7 +43,7 @@ export function AdminSheetContent({
 }
 
 interface AdminSheetShellProps {
-  icon: ComponentType<{ className?: string }>
+  icon: ComponentType<SVGProps<SVGSVGElement>>
   title: string
   description: string
   children: ReactNode

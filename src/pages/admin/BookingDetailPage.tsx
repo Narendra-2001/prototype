@@ -15,7 +15,6 @@ import {
   QrCode,
   ScrollText,
   Sparkles,
-  User,
   XCircle,
 } from "lucide-react"
 import {

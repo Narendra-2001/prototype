@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { fetchSites, getSiteMinPrice } from "@/services/api"
 import { ExploreSearchResultsView } from "@/components/employee/ExploreSearchResultsView"

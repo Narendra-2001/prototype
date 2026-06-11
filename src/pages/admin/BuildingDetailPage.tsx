@@ -482,7 +482,7 @@ export function BuildingDetailPage() {
                         labelFormatter={(_, payload) =>
                           payload?.[0]?.payload?.fullName ?? ""
                         }
-                        formatter={(value: number) => [`${value}%`, "Occupancy"]}
+                        formatter={(value) => [`${Number(value ?? 0)}%`, "Occupancy"]}
                       />
                       <Bar dataKey="occupancy" fill="var(--primary)" radius={[6, 6, 0, 0]} />
                     </BarChart>
@@ -528,7 +528,7 @@ export function BuildingDetailPage() {
                       </Pie>
                       <Tooltip
                         {...CHART_TOOLTIP_STYLE}
-                        formatter={(value: number) => [formatCurrency(value), "Revenue"]}
+                        formatter={(value) => [formatCurrency(Number(value ?? 0)), "Revenue"]}
                       />
                     </PieChart>
                   </ResponsiveContainer>

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import { Layers, Plus } from "lucide-react"
-import { createAdminFloor, fetchAdminFloors } from "@/services/adminApi"
+import { createAdminFloor, fetchAdminBuildings, fetchAdminFloors } from "@/services/adminApi"
 import { AdminCardGrid } from "@/components/admin/AdminCardGrid"
 import { AdminListToolbar } from "@/components/admin/AdminListToolbar"
 import { AdminListView } from "@/components/admin/AdminListView"
@@ -16,12 +16,20 @@ import {
   AdminSheetShell,
   AdminSheetSubmitButton,
   adminFieldInputClass,
+  adminFieldSelectClass,
 } from "@/components/admin/AdminSheetPanel"
 import { PageHeader } from "@/components/shared/PageHeader"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Sheet } from "@/components/ui/sheet"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { toast } from "sonner"
 import { usePageTransition } from "@/hooks/useGsap"
 import type { AdminFloor } from "@/types/admin"
@@ -29,28 +37,20 @@ import type { AdminFloor } from "@/types/admin"
 type FloorFormData = {
   name: string
   floorNumber: string
-  building: string
+  buildingId: string
   description: string
 }
 
 const EMPTY_FLOOR_FORM: FloorFormData = {
   name: "",
   floorNumber: "",
-  building: "",
+  buildingId: "",
   description: "",
 }
 
-const DEMO_FLOOR_FORM: FloorFormData = {
-  name: "Floor 1",
-  floorNumber: "1",
-  building: "Demo Building A",
-  description: "Level 1 accommodation wing",
-}
-
-const FLOOR_FORM_FIELDS: { label: string; key: keyof FloorFormData }[] = [
+const FLOOR_FORM_FIELDS: { label: string; key: keyof Omit<FloorFormData, "buildingId"> }[] = [
   { label: "Floor Name", key: "name" },
   { label: "Floor Number", key: "floorNumber" },
-  { label: "Building", key: "building" },
   { label: "Description", key: "description" },
 ]
 
@@ -74,7 +74,30 @@ export function FloorManagementPage() {
     queryFn: () => fetchAdminFloors({ page, pageSize: 20, search }),
   })
 
+  const { data: buildingsResult } = useQuery({
+    queryKey: ["admin-buildings", "floor-form"],
+    queryFn: () => fetchAdminBuildings({ pageSize: 100 }),
+    enabled: createOpen,
+  })
+
+  const buildings = buildingsResult?.data ?? []
+
+  const fillDemoFloorForm = () => {
+    const building = buildings.find((b) => b.name === "Demo Building A") ?? buildings[0]
+    setFloorForm({
+      name: "Floor 1",
+      floorNumber: "1",
+      buildingId: building?.id ?? "",
+      description: "Level 1 accommodation wing",
+    })
+  }
+
   const handleCreateFloor = async () => {
+    if (!floorForm.buildingId) {
+      toast.error("Please select a building")
+      return
+    }
+
     setIsCreating(true)
     try {
       await createAdminFloor(floorForm)
@@ -118,14 +141,14 @@ export function FloorManagementPage() {
                 variant="outline"
                 size="sm"
                 className="rounded-full"
-                onClick={() => setFloorForm(DEMO_FLOOR_FORM)}
+                onClick={fillDemoFloorForm}
               >
                 Demo
               </Button>
             }
             footer={
               <AdminSheetSubmitButton
-                disabled={isCreating}
+                disabled={isCreating || !floorForm.buildingId}
                 loading={isCreating}
                 onClick={handleCreateFloor}
               >
@@ -134,6 +157,26 @@ export function FloorManagementPage() {
             }
           >
             <AdminFormSection title="Floor details">
+              <div className="space-y-2">
+                <Label className="text-sm font-medium">Building</Label>
+                <Select
+                  value={floorForm.buildingId || undefined}
+                  onValueChange={(value) =>
+                    setFloorForm((prev) => ({ ...prev, buildingId: value }))
+                  }
+                >
+                  <SelectTrigger className={adminFieldSelectClass}>
+                    <SelectValue placeholder="Select building" />
+                  </SelectTrigger>
+                  <SelectContent className="rounded-xl">
+                    {buildings.map((building) => (
+                      <SelectItem key={building.id} value={building.id}>
+                        {building.siteName} — {building.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
               {FLOOR_FORM_FIELDS.map(({ label, key }) => (
                 <div key={key} className="space-y-2">
                   <Label className="text-sm font-medium">{label}</Label>

@@ -290,7 +290,7 @@ export function AdminDashboard() {
                 </Pie>
                 <Tooltip
                   contentStyle={CHART_TOOLTIP_STYLE.contentStyle}
-                  formatter={(value: number) => [`₹${value}L`, "Revenue"]}
+                  formatter={(value) => [`₹${Number(value ?? 0)}L`, "Revenue"]}
                 />
                 <Legend
                   layout="horizontal"
